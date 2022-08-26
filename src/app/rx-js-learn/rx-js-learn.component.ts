@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 
 @Component({
   selector: 'app-rx-js-learn',
@@ -9,7 +9,7 @@ import {Observable} from "rxjs";
 export class RxJSLearnComponent implements OnInit {
 
   agents !: Observable<string>;
-
+  source: Observable<number> = of(10, 12, 14, 18, 27, 33.33, 25.65);
   constructor() {
   }
 
@@ -30,7 +30,21 @@ export class RxJSLearnComponent implements OnInit {
 
     this.agents.subscribe(data=>{
       console.log(data);
+    });
+
+
+
+    //============== Of operator ========
+
+
+    this.source.subscribe( value => {
+      console.log(value)
     })
+
+
+
+
+
   }
 
 }
