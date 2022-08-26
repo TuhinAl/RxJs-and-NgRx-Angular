@@ -10,9 +10,10 @@ export class RxJSLearnComponent implements OnInit {
 
   agents !: Observable<string>;
   source: Observable<number> = of(10, 12, 14, 18, 27, 33.33, 25.65);
-  source2: Observable<any> = of({ name: 'Brian' }, [1, 2, 3], function hello() {
+  source2: Observable<any> = of({name: 'Brian'}, [1, 2, 3], function hello() {
     return 'Hello';
   });
+
   constructor() {
   }
 
@@ -31,24 +32,22 @@ export class RxJSLearnComponent implements OnInit {
       }
     );
 
-    this.agents.subscribe(data=>{
+    this.agents.subscribe(data => {
       console.log(data);
     });
 
-
+// NgRX Bad practice
+//     https://indepth.dev/posts/1442/ngrx-bad-practices
 
     //============== Of operator ========
 
 
-    this.source.subscribe( value => {
+    this.source.subscribe(value => {
       console.log(value)
     })
-    this.source2.subscribe( value => {
+    this.source2.subscribe(value => {
       console.log(value)
     })
-
-
-
 
 
   }
