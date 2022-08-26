@@ -10,6 +10,9 @@ export class RxJSLearnComponent implements OnInit {
 
   agents !: Observable<string>;
   source: Observable<number> = of(10, 12, 14, 18, 27, 33.33, 25.65);
+  source2: Observable<any> = of({ name: 'Brian' }, [1, 2, 3], function hello() {
+    return 'Hello';
+  });
   constructor() {
   }
 
@@ -38,6 +41,9 @@ export class RxJSLearnComponent implements OnInit {
 
 
     this.source.subscribe( value => {
+      console.log(value)
+    })
+    this.source2.subscribe( value => {
       console.log(value)
     })
 
