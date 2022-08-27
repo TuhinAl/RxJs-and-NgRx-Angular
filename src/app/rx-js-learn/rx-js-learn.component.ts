@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable, of} from "rxjs";
+import {observable, Observable, of} from "rxjs";
 import {StudentDto} from "./student-dto";
 
 @Component({
@@ -63,6 +63,73 @@ export class RxJSLearnComponent implements OnInit {
         console.log(error)
       }
       )
+    this.studentsList.subscribe(name => {
+      console.log(name.age)
+    });
+
+    const teams = new Observable(
+      observer => {
+        try {
+          observer.next("Real Madrid");
+          observer.next("Arsenal");
+          observer.next("Liverpool");
+          observer.next("PSG");
+          observer.next("Inter Milan");
+          setInterval(() => {
+            observer.next("Barcelona");
+            // observer.complete()
+          }, 3000)
+          observer.next("Manchester United");
+          observer.next("Chelsea");
+          observer.next("Tottenham");
+          observer.complete() // here i violate the rules
+          observer.next("Manchester City");
+          observer.next("Leeds");
+        } catch (e) {
+          observer.error(e)
+        }
+
+      }
+    )
+
+
+    console.log("======Observable asynchronous========")
+    teams.subscribe( data =>{
+      console.log(data)
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   }
