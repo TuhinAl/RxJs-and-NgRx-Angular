@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {observable, Observable, of} from "rxjs";
+import {from, observable, Observable, of} from "rxjs";
 import {StudentDto} from "./student-dto";
 
 @Component({
@@ -19,54 +19,44 @@ export class RxJSLearnComponent implements OnInit {
      {id: 1003, name: "Razu Ahmed", age:'28'},
      {id: 1004, name: "Shaiful Islam", age:'33'},
      {id: 1005, name: "Abdur Razzak", age:'41'})
+
+  fromOperator : Observable<string> = from(['Dhaka', 'Rajshahi', 'Khulna', 'Chattogram', 'Rangpur', 'Sylhet'])
+
   constructor() {
   }
 
   ngOnInit(): void {
+    this.createObservableInOldStyle();
+    this.asynchronousObservable();
+    this.OfOperator();
+    this.subscribeObservable();
+    this.fromOperatorMethod();
+  }
 
+
+
+  // NgRX Bad practice
+//     https://indepth.dev/posts/1442/ngrx-bad-practices
+
+  createObservableInOldStyle(){
     this.agents = new Observable(
       function (observer) {
         try {
           observer.next("Tuhin");
           observer.next("Tanvir");
           observer.next("Atiq");
-
         } catch (e) {
           observer.error(e);
         }
       }
     );
-
     this.agents.subscribe(data => {
       console.log(data);
     });
-
-// NgRX Bad practice
-//     https://indepth.dev/posts/1442/ngrx-bad-practices
-
-    //============== Of operator ========
+  }
 
 
-    this.source.subscribe(value => {
-      console.log(value)
-    })
-    this.source2.subscribe(value => {
-      console.log(value)
-    })
-
-    // Subscribing to Obserable
-
-    this.studentsList.subscribe( obj => {
-      console.log(obj.name)
-    },
-      error => {
-        console.log(error)
-      }
-      )
-    this.studentsList.subscribe(name => {
-      console.log(name.age)
-    });
-
+  asynchronousObservable(){
     const teams = new Observable(
       observer => {
         try {
@@ -91,47 +81,40 @@ export class RxJSLearnComponent implements OnInit {
 
       }
     )
-
-
     console.log("======Observable asynchronous========")
     teams.subscribe( data =>{
       console.log(data)
     })
+  }
 
 
+  OfOperator(){
+    this.source.subscribe(value => {
+      console.log(value)
+    })
+    this.source2.subscribe(value => {
+      console.log(value)
+    })
 
+  }
 
+  subscribeObservable(){
+    this.studentsList.subscribe( obj => {
+        console.log(obj.name)
+      },
+      error => {
+        console.log(error)
+      }
+    )
+    this.studentsList.subscribe(name => {
+      console.log(name.age)
+    });
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  fromOperatorMethod(){
+     this.fromOperator.subscribe(log => {
+       console.log(log)
+     })
   }
 
 }
