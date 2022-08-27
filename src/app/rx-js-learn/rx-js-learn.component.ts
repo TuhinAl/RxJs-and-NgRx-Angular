@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable, of} from "rxjs";
+import {StudentDto} from "./student-dto";
 
 @Component({
   selector: 'app-rx-js-learn',
@@ -13,7 +14,11 @@ export class RxJSLearnComponent implements OnInit {
   source2: Observable<any> = of({name: 'Brian'}, [1, 2, 3], function hello() {
     return 'Hello';
   });
-
+   studentsList : Observable<StudentDto> = of({id: 1001, name: "Selim Islam", age:'26'},
+     {id: 1002, name: "Jasim Islam", age:'23'},
+     {id: 1003, name: "Razu Ahmed", age:'28'},
+     {id: 1004, name: "Shaiful Islam", age:'33'},
+     {id: 1005, name: "Abdur Razzak", age:'41'})
   constructor() {
   }
 
@@ -48,6 +53,16 @@ export class RxJSLearnComponent implements OnInit {
     this.source2.subscribe(value => {
       console.log(value)
     })
+
+    // Subscribing to Obserable
+
+    this.studentsList.subscribe( obj => {
+      console.log(obj.name)
+    },
+      error => {
+        console.log(error)
+      }
+      )
 
 
   }
