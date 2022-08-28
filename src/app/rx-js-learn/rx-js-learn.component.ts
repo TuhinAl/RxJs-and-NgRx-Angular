@@ -14,11 +14,11 @@ export class RxJSLearnComponent implements OnInit {
   source2: Observable<any> = of({name: 'Brian'}, [1, 2, 3], function hello() {
     return 'Hello';
   });
-   studentsList : Observable<StudentDto> = of({id: 1001, name: "Selim Islam", age:'26'},
-     {id: 1002, name: "Jasim Islam", age:'23'},
-     {id: 1003, name: "Razu Ahmed", age:'28'},
-     {id: 1004, name: "Shaiful Islam", age:'33'},
-     {id: 1005, name: "Abdur Razzak", age:'41'})
+   studentsList : Observable<StudentDto> = of({id: 1001, name: "Selim Islam", age:26},
+     {id: 1002, name: "Jasim Islam", age:23},
+     {id: 1003, name: "Razu Ahmed", age:28},
+     {id: 1004, name: "Shaiful Islam", age:33},
+     {id: 1005, name: "Abdur Razzak", age:41})
 
   fromOperator : Observable<string> = from(['Dhaka', 'Rajshahi', 'Khulna', 'Chattogram', 'Rangpur', 'Sylhet'])
 
@@ -28,9 +28,11 @@ export class RxJSLearnComponent implements OnInit {
   ngOnInit(): void {
     this.createObservableInOldStyle();
     this.asynchronousObservable();
-    this.OfOperator();
+    this.ofOperator();
     this.subscribeObservable();
     this.fromOperatorMethod();
+
+
   }
 
 
@@ -88,7 +90,7 @@ export class RxJSLearnComponent implements OnInit {
   }
 
 
-  OfOperator(){
+  ofOperator(){
     this.source.subscribe(value => {
       console.log(value)
     })
