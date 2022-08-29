@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {filter, from, map, noop, Observable, Observer} from "rxjs";
+import {filter, from, map, noop, Observable, Observer, shareReplay, tap} from "rxjs";
 import {StudentDto} from "../rx-js-learn/student-dto";
 import {Course} from "./course";
 
@@ -14,6 +14,8 @@ export class RxjsOperatorComponent implements OnInit {
 
   beginnersCourse !: Course[];
   advanceCourse !: Course[];
+  beginnersCourse$ !: Observable<Course[]>;
+  advanceCourse$ !: Observable<Course[]>;
 
   studentsList$: Observable<StudentDto> = from([{id: 1001, name: "Selim Islam", age: 26},
     {id: 1002, name: "Jasim Islam", age: 13},
@@ -32,7 +34,11 @@ export class RxjsOperatorComponent implements OnInit {
     this.teenageStudent();
     this.mapOperator();
     this.declarativeStyle();
+    this.reactivePattern();
   }
+
+
+  //observable concatenation
 
 
   //declarative style
@@ -48,10 +54,22 @@ export class RxjsOperatorComponent implements OnInit {
       })
   }
 
+  //reactivePattern()
+  reactivePattern(){
+    const courses$ = this.createHttpObservable('http://localhost:3000/payload');
+    this.beginnersCourse$ = courses$.pipe(map(courses => courses.filter((course: Course) => course.category === 'BEGINNER')))
+    this.advanceCourse$ = courses$.pipe(map(courses => courses.filter((course: Course) => course.category === 'ADVANCED')))
+  }
+
 
   //map()
   mapOperator() {
-    const http$ = this.createHttpObservable('http://localhost:3000/payload');
+    const http$ = this.createHttpObservable('http://localhost:3000/payload').pipe(
+      tap(() => {
+        console.log("HTTP Request Executed")
+      }),
+      shareReplay()
+    );
     http$.subscribe(data => {
       console.log(data),
         noop,

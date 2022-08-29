@@ -1,10 +1,24 @@
 <p>RxJS</p>
+<p> declarative</p>
 <div *ngFor=" let i of beginnersCourse" >
-  <p></p>
   <table>
-    <thead>head</thead>
     <tbody>
     <td>{{i.id}}</td>
+    </tbody>
+  </table>
+</div>
+<div>
+  <p> reactive Beginner</p>
+  <table>
+    <tbody>
+    <td>{{beginnersCourse$ | async}}</td>
+    </tbody>
+  </table>
+</div><div>
+  <p> reactive Advanced</p>
+  <table>
+    <tbody>
+    <td>{{advanceCourse$ | async}}</td>
     </tbody>
   </table>
 </div>
