@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {filter, from, map, Observable, of} from "rxjs";
+import {Component, OnInit} from '@angular/core';
+import {filter, from, Observable} from "rxjs";
 import {StudentDto} from "../rx-js-learn/student-dto";
-import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
 
 @Component({
   selector: 'app-rxjs-operator',
@@ -25,6 +24,29 @@ export class RxjsOperatorComponent implements OnInit {
   ngOnInit(): void {
     // this.inBetweenNumber();
     this.teenageStudent();
+
+    document.addEventListener('click', event=>{
+      console.log(event);
+    })
+    let count = 0;
+    setInterval(()=>{
+      console.log(++count);
+    }, 2000)
+
+    setTimeout(()=>{
+      console.log('finished .....');
+    },7000)
+
+    setTimeout(()=>{
+      console.log('please stop your interval .....');
+    },11000)
+
+    setTimeout(()=>{
+      console.log('Hey are you there .....');
+    },20000)
+    setTimeout(()=>{
+      console.log('Stop please .....');
+    },29000)
   }
 
   //filter()
